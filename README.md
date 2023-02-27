@@ -15,6 +15,7 @@
 
 - Python 
 - Apache Airflow 
+- Microsoft SQL server
 
 # Carpetas del proyecto 
 
