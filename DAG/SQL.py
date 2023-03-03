@@ -3,21 +3,7 @@ from datetime import timedelta, datetime
 
 from airflow import DAG as DAG 
 from airflow.operators.python import PythonOperator
-
-
-#from airflow.providers.microsoft.mssql.hooks.mssql import MsSqlHook
-
-#from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
-
-
-
-
-#from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
-#from airflow.providers.microsoft.mssql.hooks.mssql import MsSqlHook
-
-#from airflow.hooks.postgres_hook import PostgresHook
-
-
+from airflow.providers.postgres.operators.postgres import PostgresOperator
 from dags.funtions.SQL_extract import extr_Sql 
 
 default_args = {
@@ -30,11 +16,7 @@ default_args = {
     "retry_delay":timedelta(minutes=1)
 }
 
-
-
-
 with DAG(
-
      "SQL_DAG", 
      default_args=default_args,
      start_date= datetime(2022,1,12),
@@ -46,8 +28,19 @@ with DAG(
      template_searchpath = "/usr/local/air_flow/include/"
 ) as dag: 
 
+
     extract_data= PythonOperator(task_id="extract_data", python_callable=extr_Sql )
+    Create_table_postg = PostgresOperator(
+                         task_id = "Create_backup", 
+                         postgres_conn_id ="Postgres_conn", 
+                         sql = "sql/post.sql"
+
+
+    )
 
 
 
-    extract_data 
+
+
+
+    extract_data >> Create_table_postg 
