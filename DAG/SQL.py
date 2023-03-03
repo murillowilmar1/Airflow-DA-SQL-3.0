@@ -3,19 +3,7 @@ from datetime import timedelta, datetime
 
 from airflow import DAG as DAG 
 from airflow.operators.python import PythonOperator
-
-
-#from airflow.providers.microsoft.mssql.hooks.mssql import MsSqlHook
-
-#from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
-
-
-
-
-#from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
-#from airflow.providers.microsoft.mssql.hooks.mssql import MsSqlHook
-
-#from airflow.hooks.postgres_hook import PostgresHook
+from airflow.providers.postgres.operators.postgres import PostgresOperator
 
 
 from dags.funtions.SQL_extract import extr_Sql 
@@ -57,4 +45,4 @@ with DAG(
 
 
 
-    extract_data 
+    extract_data >> Create_table_postg
