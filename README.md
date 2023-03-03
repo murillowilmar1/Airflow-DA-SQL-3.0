@@ -20,6 +20,7 @@
 # Carpetas del proyecto 
 
 - DAG: Contiene los archivos del DAG.py y la carpeta interna funciones que se utilizó para optimzar el codigo
+- SQL : Contiene los archivos .sql que se realizaron para crear los backups 
 
 
 # Descripción del proyecto  
